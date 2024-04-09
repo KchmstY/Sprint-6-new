@@ -9,7 +9,6 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-// Task ...
 type Task struct {
 	ID           string   `json:"id"`
 	Description  string   `json:"description"`
@@ -41,7 +40,6 @@ var tasks = map[string]Task{
 	},
 }
 
-// Ниже напишите обработчики для каждого эндпоинта
 func getTasks(w http.ResponseWriter, r *http.Request) {
 
 	resp, err := json.Marshal(tasks)
@@ -121,7 +119,6 @@ func deleteTask(w http.ResponseWriter, r *http.Request) {
 func main() {
 	r := chi.NewRouter()
 
-	// здесь регистрируйте ваши обработчики
 	r.Get("/tasks", getTasks)
 
 	r.Post("/tasks", createTask)
@@ -131,7 +128,7 @@ func main() {
 	r.Delete("/tasks/{id}", deleteTask)
 
 	if err := http.ListenAndServe(":8080", r); err != nil {
-		fmt.Printf("Ошибка при  запуске сервера: %s", err.Error())
+		fmt.Printf("Ошибка при запуске сервера: %s", err.Error())
 		return
 	}
 }
